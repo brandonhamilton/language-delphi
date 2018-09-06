@@ -1,0 +1,54 @@
+name:                language-delphi
+version:             0.1.0.0
+synopsis:            Parser and pretty-printer for Delphi
+description:         A library for the analysis of Delphi code.
+homepage:            https://github.com/brandonhamilton/language-delphi#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Brandon Hamilton
+maintainer:          brandon.hamilton@gmail.com
+copyright:           2018 Brandon Hamilton
+bug-reports:         https://github.com/brandonhamilton/language-delphi/issues
+category:            Language
+build-type:          Simple
+
+extra-source-files:  README.md
+                     src/Language/Delphi/Parser/Internal.y
+                     src/Language/Delphi/Parser/Lexer.x
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  
+  exposed-modules:     Language.Delphi
+                     , Language.Delphi.Parser
+                     , Language.Delphi.Syntax
+  
+  other-modules:       Language.Delphi.Parser.Internal
+                     , Language.Delphi.Parser.Lexer
+                     , Language.Delphi.Syntax.AST
+                     , Language.Delphi.Syntax.Token
+
+  build-tools:         alex >=3.1
+                     , happy >=1.19.8
+
+  build-depends:       base                 >=4.8  && <5.0
+                     , prettyprinter        >=1.0  && <2.0
+                     , transformers         >=0.4  && <0.6
+                     , array                >=0.5  && <0.6
+                     , deepseq              >=1.1  && <1.5
+  if impl(ghc < 8)
+    build-depends:     semigroups           >=0.18
+
+  ghc-options:         -Wall
+
+  if impl(ghc >= 8)
+    ghc-options:
+                       -Wincomplete-patterns
+                       -Wincomplete-uni-patterns
+                       -Wmissing-signatures
+
+source-repository head
+  type:     git
+  location: https://github.com/brandonhamilton/language-delphi
