@@ -9,4 +9,4 @@ spec :: Spec
 spec = do
   describe "lexer" $ do
     it "ignores whitespace" $ do
-      length (lexer " ") `shouldBe` 0
+      length <$> lexDelphi " " `shouldBe` Right 0
