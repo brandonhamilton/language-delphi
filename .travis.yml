@@ -30,6 +30,7 @@ install:
   - ghc --version
   - cabal install happy --constraint 'happy >= 1.19.9'
   - cabal install alex
+  - cabal install hspec-discover
   - cabal install --verbose --enable-tests
   - cabal configure
 

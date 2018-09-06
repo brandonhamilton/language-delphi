@@ -10,7 +10,7 @@ Portability : GHC
 -}
 
 module Language.Delphi.Parser.Lexer 
-  (
+  ( lexer
   ) where
 
 import Language.Delphi.Syntax.Token
@@ -21,3 +21,8 @@ import Language.Delphi.Syntax.Token
 tokens  :-
 
     $white+         ;
+
+{
+lexer :: String -> [Token]
+lexer = alexScanTokens
+}
