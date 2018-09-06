@@ -10,23 +10,23 @@ Portability : GHC
 -}
 
 module Language.Delphi.Parser.Internal 
-  (
+  ( parseDelphi
   ) where
 
 import Language.Delphi.Syntax
 }
 
-%name delphiParser
+%name parseDelphi
 
 %tokentype { Token }
 %error { parseError }
 
 %token
-  program             { Token }
+  program             { TokEOF }
 
 %%
 
-Program : program     { Token }
+Program : program     { TokEOF }
 
 {
 parseError :: [Token] -> a

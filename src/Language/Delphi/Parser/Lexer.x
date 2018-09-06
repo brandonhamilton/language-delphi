@@ -9,20 +9,28 @@ Stability   : experimental
 Portability : GHC
 -}
 
-module Language.Delphi.Parser.Lexer 
-  ( lexer
+module Language.Delphi.Parser.Lexer
+  ( lexDelphi
   ) where
 
 import Language.Delphi.Syntax.Token
 }
 
-%wrapper "basic"
+%wrapper "monad"
 
 tokens  :-
 
     $white+         ;
 
 {
-lexer :: String -> [Token]
-lexer = alexScanTokens
+alexEOF :: Alex Token
+alexEOF = pure TokEOF
+
+lexDelphi :: String -> Either String [Token]
+lexDelphi str = runAlex str go
+  where
+    go = do
+      tok' <- alexMonadScan
+      if tok' == TokEOF then pure []
+          else (tok' :) <$> go
 }
